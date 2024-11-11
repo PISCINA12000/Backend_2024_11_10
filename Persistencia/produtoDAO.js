@@ -94,7 +94,7 @@ export default class ProdutoDAO {
         const [linhas, campos] = await conexao.execute(sql, parametros);
         let listaProdutos = [];
         for (const linha of linhas) {
-            const categoria = new Categoria(linha['codigo'],linha["descricao"]);    
+            const categoria = new Categoria(linha["codigo"],linha["descricao"]);    
             const produto = new Produto(
                 linha['prod_codigo'],
                 linha['prod_descricao'],
@@ -104,8 +104,8 @@ export default class ProdutoDAO {
                 linha['prod_urlImagem'],
                 linha['prod_dataValidade'],
                 categoria
-            );
-            listaProdutos.push(produto);
+            )
+            listaProdutos.push(produto)
         }
         await conexao.release();
         return listaProdutos;
