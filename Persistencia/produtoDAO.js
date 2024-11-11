@@ -23,7 +23,7 @@ export default class ProdutoDAO {
                     prod_dataValidade DATE NOT NULL,
                     prod_fk_codigo_cat INT NOT NULL,
                     CONSTRAINT pk_produto PRIMARY KEY(prod_codigo),
-                    CONSTRAINT fk_categoria FOREIGN KEY(fk_codigo_cat) REFERENCES categoria(codigo)
+                    CONSTRAINT fk_categoria FOREIGN KEY(prod_fk_codigo_cat) REFERENCES categoria(codigo)
                 )
             `
             await conexao.execute(sql);
@@ -37,7 +37,7 @@ export default class ProdutoDAO {
     async incluir(produto) {
         if (produto instanceof Produto) {
             const conexao = await conectar();
-            const sql = `INSERT INTO produto(prod_descricao,prod_precoCusto,prod_precoVenda,prod_qtdEstoque,prod_urlImagem,prod_dataValidade, prod_fk_codigo_cat)
+            const sql = `INSERT INTO produto(prod_descricao,prod_precoCusto,prod_precoVenda,prod_qtdEstoque,prod_urlImagem,prod_dataValidade,prod_fk_codigo_cat)
                 values(?,?,?,?,?,str_to_date(?,'%d/%m/%Y'),?)
             `
             let parametros = [
